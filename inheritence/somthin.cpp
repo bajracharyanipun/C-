@@ -5,12 +5,11 @@ class person{
     int age;
 
 public:
-    person(string n, int a) {
-        this->name = name;
-    this->age = age;
+    person(string name, int age){
+        this->name=name;
+        this->age=age;
     }
-    
-protected:
+    protected:
     string getName() 
 {
         return name;
