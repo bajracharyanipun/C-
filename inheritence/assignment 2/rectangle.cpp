@@ -1,33 +1,55 @@
 #include <iostream>
+#include <string>
 using namespace std;
  
-class Rectangle {
+class BankAccount {
 public:
-    double length;
-    double width;
+    string accountNumber;
+    string accountHolder;
+    double balance;
  
-    double calculateArea() {
-        return length * width;
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposited: " << amount << endl;
+        } else {
+            cout << "Invalid deposit amount." << endl;
+        }
     }
  
-    double calculatePerimeter() {
-        return 2 * (length + width);
+    void withdraw(double amount) {
+        if (amount <= 0) {
+            cout << "Invalid withdrawal amount." << endl;
+        } else if (amount > balance) {
+            cout << "Insufficient balance for withdrawal of " << amount << endl;
+        } else {
+            balance -= amount;
+            cout << "Withdrawn: " << amount << endl;
+        }
     }
  
-    void display() {
-        cout << "Length    : " << length << endl;
-        cout << "Width     : " << width << endl;
-        cout << "Area      : " << calculateArea() << endl;
-        cout << "Perimeter : " << calculatePerimeter() << endl;
+    void displayBalance() {
+        cout << "Account Number : " << accountNumber << endl;
+        cout << "Account Holder : " << accountHolder << endl;
+        cout << "Balance        : " << balance << endl;
+        cout << "-----------------------------" << endl;
     }
 };
  
 int main() {
-    Rectangle r1;
-    r1.length = 10.5;
-    r1.width = 4.2;
+    BankAccount acc;
+    acc.accountNumber = "AC1001";
+    acc.accountHolder = "Nabin Karki";
+    acc.balance = 5000;
  
-    r1.display();
+    acc.displayBalance();
+ 
+    acc.deposit(2000);
+    acc.withdraw(1500);
+    acc.withdraw(10000); // should fail - insufficient balance
+    acc.deposit(-500);   // should fail - invalid amount
+ 
+    acc.displayBalance();
  
     return 0;
 }
